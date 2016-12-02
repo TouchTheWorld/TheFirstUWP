@@ -11,14 +11,27 @@
         <Image x:Name="background_image" Source="Assets/Back.jpg" Opacity="0.8"/>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock x:Name="upText" Margin="20" FontSize="25" HorizontalAlignment="Center"/>
-            <TextBox x:Name="nameTextBox" PlaceholderText="请输入账号" Margin="10" Width="170" />
-            <PasswordBox x:Name="passwordBox" PlaceholderText="请输入密码" Margin="10" Width="170" />
+            <TextBox x:Name="nameTextBox" PlaceholderText="请输入账号" Margin="10" Width="170"/>
+            <PasswordBox x:Name="passwordBox" PlaceholderText="请输入密码" Margin="10" Width="170"/>
             <StackPanel Orientation="Horizontal" 
                         HorizontalAlignment="Center">
-                <Button x:Name="forgetButton" Margin="0,20,10,10" Content="忘记密码？"/>
-                <Button x:Name="loginButton" Margin="10,20,0,10" Content="登录" Click="loginButton_Click"/>
+                <Button x:Name="forgetButton" Margin="0,20,10,10" Content="忘记密码？">
+                    <Button.Flyout>
+                        <Flyout >
+                            <TextBlock  TextWrapping="Wrap" Text="我又有什么办法啊,我也很绝望啊"/>
+                        </Flyout>
+                    </Button.Flyout>
+                </Button>
+                <Button x:Name="loginButton" Margin="10,20,0,10" Content="登录" Click="loginButton_Click">
+                    <FlyoutBase.AttachedFlyout >
+                        <Flyout >
+                            <TextBlock x:Name="loginFlyoutText" TextWrapping="Wrap" Foreground="Red" />
+                        </Flyout>
+                    </FlyoutBase.AttachedFlyout>
+                </Button>
             </StackPanel>
-            <Button x:Name="logUpButton" Margin="0,40,0,00" Width="170" Content="注册新账号" HorizontalAlignment="Center"/>
+            <Button x:Name="logUpButton" Margin="0,40,0,00" Width="170" Content="注册新账号" 
+                    HorizontalAlignment="Center" Click="logUpButton_Click"/>
         </StackPanel>
     </Grid>
 </Page>

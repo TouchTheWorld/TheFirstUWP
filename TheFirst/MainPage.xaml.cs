@@ -22,6 +22,7 @@ namespace TheFirst
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        Message message = new Message("BlackFacer", "8088");
         public MainPage()
         {
             this.InitializeComponent();
@@ -29,12 +30,31 @@ namespace TheFirst
         
         private void loginButton_Click(object sender, RoutedEventArgs e)
         {
-            String a = nameTextBox.Text;
-            if (nameTextBox.Text != "")
+            upText.Text = "";
+            if (message.search(nameTextBox.Text))
             {
-                upText.Text = "2326";
-               // this.Frame.Navigate(typeof(SecondPage));
+               if(message.martch(nameTextBox.Text,passwordBox.Password))
+                {
+                    upText.Text = "(゜-゜)つロ乾杯\n此处应留下点什么蓝色的东西（滑稽）";
+                    loginFlyoutText.Text = "登陆成功！";
+                    FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+                }
+               else
+                {
+                    loginFlyoutText.Text = "密码错误！";
+                    FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+                }
             }
+            else
+            {
+                loginFlyoutText.Text = "账号不存在，请注册新账号";
+                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+            }
+        }
+
+        private void logUpButton_Click(object sender, RoutedEventArgs e)
+        {
+               this.Frame.Navigate(typeof(SecondPage));
         }
     }
 }

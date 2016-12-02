@@ -22,9 +22,41 @@ namespace TheFirst
     /// </summary>
     public sealed partial class SecondPage : Page
     {
+        Message mess = new Message();
         public SecondPage()
         {
             this.InitializeComponent();
+        }
+
+        private void logUpOkButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(regupNameTextBox.Text == "" || reguoPasswordBox.Password == "")
+            {
+                logupFlyoutText.Text = "输入不能为空！";
+                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+            }
+            else if (mess.search(regupNameTextBox.Text))
+            {
+                logupFlyoutText.Text = "账号已存在";
+                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+            }
+            else
+            {
+                mess.regin(regupNameTextBox.Text, reguoPasswordBox.Password);
+                displayNoWifiDialog();
+                this.Frame.Navigate(typeof(MainPage));
+            }
+        }
+
+        private async void displayNoWifiDialog()
+        {
+            ContentDialog noWifiDialog = new ContentDialog()
+            {
+                Title = "注册成功！",
+                PrimaryButtonText = "Ok"
+            };
+
+            ContentDialogResult result = await noWifiDialog.ShowAsync();
         }
     }
 }
